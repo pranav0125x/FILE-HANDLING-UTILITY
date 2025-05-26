@@ -40,16 +40,45 @@ public class FileHandling{
     public static void main(String args[]){
 
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter the info to write: ");
-        String a = sc.nextLine();
-        WriteToFile("xyz.txt", a);
+        String fileName = "xyz.txt";
+        int choice;
 
-        ReadTheFile("xyz.txt");
+        do {
+            System.out.println("Choose an option:");
+            System.out.println("1. Write to File");
+            System.out.println("2. Append to File");
+            System.out.println("3. Read the File");
+            System.out.println("4. Close");
+            System.out.print("Enter your choice (1-4): ");
+            choice = sc.nextInt();
+            sc.nextLine(); // consume newline
 
-        System.out.print("Enter the info to Append: ");
-        String b = sc.nextLine();
-        AppendToFile("xyz.txt", b);
+            switch(choice) {
+                case 1:
+                    System.out.print("Enter the info to Write: ");
+                    String writeText = sc.nextLine();
+                    WriteToFile(fileName, writeText);
+                    break;
 
-        ReadTheFile("xyz.txt");
+                case 2:
+                    System.out.print("Enter the info to Append: ");
+                    String appendText = sc.nextLine();
+                    AppendToFile(fileName, appendText);
+                    break;
+
+                case 3:
+                    ReadTheFile(fileName);
+                    break;
+
+                case 4:
+                    System.out.println("Closing the program. Goodbye!");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice. Please enter 1 to 4.\n");
+            }
+
+        } while (choice != 4);
+        sc.close();
     }
 }
